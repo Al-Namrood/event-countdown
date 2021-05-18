@@ -1,14 +1,24 @@
 import React from "react";
 
 const Events = ({ eventCountDown }) => {
-  console.log(eventCountDown, "popopô");
-  return eventCountDown.map((event) => (
-    <div>
-      <div key={event.id}>
-        {event.event} {event.date}
+  return eventCountDown.map((event) => {
+    // const formatDate = (date) => {
+    //   return `${date.getDate()}:${date.getMonth() + 1}:${date.getFullYear()}`;
+    // };
+
+    const newDate = new Date(event.date);
+    const formatDate = newDate.toLocaleDateString();
+  
+
+    return (
+      <div>
+        <div key={event.id}>
+          <p>{event.event}</p>
+          <p>{formatDate}</p>
+        </div>
       </div>
-    </div>
-  ));
+    );
+  });
 };
 
 export default Events;

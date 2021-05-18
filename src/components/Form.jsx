@@ -1,16 +1,9 @@
 import React, { useState } from "react";
+import { TextField, Button } from "@material-ui/core";
 
 const Form = (props) => {
   const [event, setEvent] = useState("");
   const [date, setDate] = useState("");
-
-  const handleOnChangeEvent = (e) => {
-    setEvent(e.target.value);
-  };
-
-  const handleOnChangeDate = (e) => {
-    setDate(e.target.value);
-  };
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
@@ -28,33 +21,40 @@ const Form = (props) => {
   return (
     <form onSubmit={handleOnSubmit}>
       <div>
-        <label>Enter an event: </label>
-        <input
+        <TextField
           type="text"
           name="event"
-          placeholder="Go to Canada..."
+          placeholder="Go to Mars"
           id="event"
           value={event}
           required
-          onChange={handleOnChangeEvent}
+          variant="outlined"
+          onChange={(e) => setEvent(e.target.value)}
         />
       </div>
 
       <div>
-        <label>Enter a date: </label>
-        <input
-          type="text"
+        <TextField
+          type="date"
           name="date"
           placeholder="14/12/2024..."
           id="date"
           value={date}
           required
-          onChange={handleOnChangeDate}
+          variant="outlined"
+          onChange={(e) => setDate(e.target.value)}
         />
       </div>
 
       <div>
-        <input type="submit" value="Save event" />
+        <Button
+          type="submit"
+          value="Save event"
+          variant="contained"
+          color="primary"
+        >
+          Add
+        </Button>
       </div>
     </form>
   );
