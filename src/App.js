@@ -1,11 +1,11 @@
 import { Container } from "@material-ui/core";
-import EventList from "./components/EventList";
+import Event from "./components/Event";
 
-function App(props) {
+function App() {
   return (
     <Container>
       <h1 style={{ textAlign: "center" }}>Event countdown</h1>
-      <EventList />
+      <Event />
     </Container>
   );
 }

@@ -2,13 +2,16 @@ import React, { useState } from "react";
 import { TextField, Button } from "@material-ui/core";
 
 const Form = (props) => {
+  const { onSubmit, onClick } = props;
+
+  // console.log(onClick, 'props')
   const [event, setEvent] = useState("");
   const [date, setDate] = useState("");
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
 
-    props.onSubmit({
+    onSubmit({
       id: Math.floor(Math.random() * 100000),
       event: event,
       date: date,
@@ -16,6 +19,7 @@ const Form = (props) => {
 
     setEvent("");
     setDate("");
+    onClick(false);
   };
 
   return (

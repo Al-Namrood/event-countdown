@@ -1,25 +1,47 @@
-import React from "react";
-import { useState } from "react";
-import Form from "./Form";
-import Event from "./Event";
+import React, { useEffect, useState } from "react";
+import { DateTime } from "luxon";
+import formatDate from "../helpers/formatDate";
 
-const AddEvent = () => {
-  const [eventCountDown, SetEventCountdown] = useState([]);
+const EventList = (props) => {
+  const { value } = props;
+  console.log(value, "testteste");
 
-  //Create
-  const addEvent = (event) => {
-    const id = Math.floor(Math.random() * 10000) + 1;
-    const newEventCountdown = { id, ...event };
-    SetEventCountdown([...eventCountDown, newEventCountdown]);
-  };
+  // const [month, setMonth] = useState(0);
+  // const [days, setDays] = useState(0);
+  // const [hours, setHours] = useState(0);
+  // const [minutes, setMinutes] = useState(0);
+
+  // useEffect(() => {
+  //   setInterval(() => {
+  //     const now = DateTime.local();
+  //     const then = DateTime(value.date).setZone("local");
+  //     console.log(then, "thendate");
+  //     const countdown = DateTime(then - now);
+  //     console.log(countdown, "now");
+  //     // setMonth(countdown.format('D'))
+  //     // setDays(countdown.format('D'))
+  //     // setHours(countdown.format('HH'))
+  //     // setMinutes(countdown.format('mm'))
+  //   }, 1000);
+  // }, []);
+
+  // const formatDate = (date) => {
+  //   date = new Date(date);
+  //   return `${date.getDate()}/${("0" + (date.getMonth() + 1)).slice(
+  //     -2
+  //   )}/${date.getFullYear()}`;
+  // };
 
   return (
-    <>
-      <h1>Add event</h1>
-      <Form onSubmit={addEvent} />
-      <Event eventCountDown={eventCountDown} />
-    </>
+    <div>
+      {value.map((e) => (
+        <div key={e.id}>
+          <h2>{e.event}</h2>
+          <p>{formatDate(e.date)}</p>
+        </div>
+      ))}
+    </div>
   );
 };
 
-export default AddEvent;
+export default EventList;
