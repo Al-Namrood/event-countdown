@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import {
   Button,
@@ -10,15 +10,14 @@ import {
 import Form from "./Form";
 import EventList from "./EventList";
 
+
 const Event = () => {
   const [eventCountDown, SetEventCountdown] = useState([]);
-  console.log(eventCountDown);
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
   };
-
   const handleClose = () => {
     setOpen(false);
   };

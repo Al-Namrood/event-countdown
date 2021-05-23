@@ -1,36 +1,33 @@
 import React, { useEffect, useState } from "react";
-import { DateTime } from "luxon";
 import formatDate from "../helpers/formatDate";
+import moment from "moment";
 
 const EventList = (props) => {
   const { value } = props;
-  console.log(value, "testteste");
+  console.log(
+    value.map((e) => e.date),
+    "testteste"
+  );
 
-  // const [month, setMonth] = useState(0);
-  // const [days, setDays] = useState(0);
-  // const [hours, setHours] = useState(0);
-  // const [minutes, setMinutes] = useState(0);
+  const [days, setDays] = useState(null);
+  const [hours, setHours] = useState(null);
+  const [minutes, setMinutes] = useState(null);
+  const [seconds, setSeconds] = useState(null);
 
-  // useEffect(() => {
-  //   setInterval(() => {
-  //     const now = DateTime.local();
-  //     const then = DateTime(value.date).setZone("local");
-  //     console.log(then, "thendate");
-  //     const countdown = DateTime(then - now);
-  //     console.log(countdown, "now");
-  //     // setMonth(countdown.format('D'))
-  //     // setDays(countdown.format('D'))
-  //     // setHours(countdown.format('HH'))
-  //     // setMinutes(countdown.format('mm'))
-  //   }, 1000);
-  // }, []);
+  useEffect(() => {
+    setInterval(() => {
+      const now = moment().format("MM-DD-YYYY");
+      // const then = moment(value.date);
+      const then = moment(value.map((e) => e.date));
+      // console.log(then, "then");
 
-  // const formatDate = (date) => {
-  //   date = new Date(date);
-  //   return `${date.getDate()}/${("0" + (date.getMonth() + 1)).slice(
-  //     -2
-  //   )}/${date.getFullYear()}`;
-  // };
+      const countdown = moment(then - now);
+      setDays(countdown.format("D"));
+      setHours(countdown.format("HH"));
+      setMinutes(countdown.format("mm"));
+      setSeconds(countdown.format("ss"));
+    }, 1000);
+  }, [value]);
 
   return (
     <div>
@@ -38,6 +35,7 @@ const EventList = (props) => {
         <div key={e.id}>
           <h2>{e.event}</h2>
           <p>{formatDate(e.date)}</p>
+          <p>{`${days}:${hours}:${minutes}:${seconds}`}</p>
         </div>
       ))}
     </div>
